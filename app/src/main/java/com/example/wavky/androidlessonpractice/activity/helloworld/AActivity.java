@@ -1,4 +1,4 @@
-package com.example.wavky.androidlessonpractice;
+package com.example.wavky.androidlessonpractice.activity.helloworld;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.wavky.androidlessonpractice.R;
 
 /**
  * Created on 2018/08/04
@@ -42,13 +44,26 @@ public class AActivity extends Activity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(AActivity.this, BActivity.class));
+//                                startActivity(new Intent(AActivity.this, BActivity.class));
+                                startActivityForResult(
+                                        new Intent(AActivity.this, BActivity.class),
+                                        100);
                             }
                         })
                         .setNegativeButton("No", null)
                         .show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Toast.makeText(this, "req code:" + requestCode
+                        + "res code:" + resultCode
+                        + "result:" + data.getIntExtra("result", 0)
+                , Toast.LENGTH_SHORT).show();
     }
 
     @Override
